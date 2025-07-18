@@ -1,8 +1,3 @@
-function startGame() {
-  document.getElementById("landing").style.display = "none";
-  document.getElementById("game").style.display = "block";
-}
-
 const words = [
   "Blue", "Red", "Green", "Yellow",
   "Beagle", "Poodle", "Dalmatian", "Boxer",
@@ -11,18 +6,49 @@ const words = [
 ];
 
 const answers = [
-  ["Blue", "Red", "Green", "Yellow"],           // Colors
-  ["Beagle", "Poodle", "Dalmatian", "Boxer"],   // Dog Breeds
-  ["Waffle", "Pancake", "Muffin", "Bagel"],     // Breakfast Foods
-  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Rhyming Words
+  ["Blue", "Red", "Green", "Yellow"],
+  ["Beagle", "Poodle", "Dalmatian", "Boxer"],
+  ["Waffle", "Pancake", "Muffin", "Bagel"],
+  ["Fiddle", "Middle", "Riddle", "Diddle"]
 ];
 
+let player = {
+  firstName: "",
+  lastName: "",
+  startTime: null,
+  groupTimes: [],
+  currentGroupStart: null
+};
+
+let solvedGroups = 0;
+
+function startGame() {
+  const first = document.getElementById("firstName").value.trim();
+  const last = document.getElementById("lastName").value.trim();
+
+  if (!first || !last) {
+    alert("Please enter both your first and last name.");
+    return;
+  }
+
+  player.firstName = first;
+  player.lastName = last;
+  player.startTime = Date.now();
+  player.currentGroupStart = Date.now();
+
+  document.getElementById("landing").style.display = "none";
+  document.getElementById("game").style.display = "block";
+
+  renderGrid();
+}
+
 const grid = document.getElementById("grid");
-let selected = [];
 
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
+
+let selected = [];
 
 function renderGrid() {
   grid.innerHTML = "";
@@ -58,11 +84,26 @@ function submitGuess() {
   );
 
   if (matchedGroup) {
+    const now = Date.now();
+    const timeTaken = (now - player.currentGroupStart) / 1000;
+    player.groupTimes.push(timeTaken.toFixed(2));
+    player.currentGroupStart = now;
+
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("correct");
       cell.onclick = null;
     });
+
+    solvedGroups++;
+
+    if (solvedGroups === answers.length) {
+      const totalTime = (now - player.startTime) / 1000;
+      alert(`🎉 Well done, ${player.firstName} ${player.lastName}!\n
+You solved all ${answers.length} groups in ${totalTime.toFixed(2)} seconds.\n
+Group times: ${player.groupTimes.join(", ")} seconds.`);
+    }
+
   } else {
     alert("Incorrect group. Try again!");
     selectedCells.forEach(cell => cell.classList.remove("selected"));
@@ -78,5 +119,3 @@ function revealAnswers() {
     }
   });
 }
-
-renderGrid();
