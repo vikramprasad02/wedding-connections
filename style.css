@@ -1,24 +1,44 @@
+/* Base Layout */
 body {
-  font-family: sans-serif;
-  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #fdf6f0;
   color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
+#container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Inputs & Buttons */
 input {
   margin: 5px;
   padding: 8px;
   font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
-  margin: 10px;
+  margin: 15px 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background: #eee;
+  border: 1px solid #999;
+  border-radius: 8px;
+  transition: background 0.2s ease;
 }
 
-#solved,
+button:hover {
+  background: #ddd;
+}
+
+/* Grid & Solved Areas */
 #grid {
   display: grid;
   grid-template-columns: repeat(4, 100px);
@@ -27,6 +47,15 @@ button {
   margin-top: 20px;
 }
 
+#solved {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px auto 10px;
+  max-width: 500px;
+}
+
+/* Grid Cells */
 .cell {
   border: 2px solid #aaa;
   padding: 15px;
@@ -37,6 +66,7 @@ button {
   border-radius: 8px;
   user-select: none;
   transition: all 0.2s ease;
+  font-weight: bold;
 }
 
 .cell.selected {
@@ -46,10 +76,11 @@ button {
 
 .cell.correct {
   color: black;
-  font-weight: bold;
   border-color: #444;
+  cursor: default;
 }
 
+/* Shake Animation */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -62,39 +93,32 @@ button {
   animation: shake 0.4s ease;
 }
 
+/* Solved Group Cards */
 .solved-card {
+  padding: 15px 20px;
   border-radius: 10px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
   color: #111;
-  padding: 10px;
-  width: 85%;
-  margin: 10px auto;
-  font-weight: bold;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
 }
 
 .solved-title {
-  font-size: 1.1em;
-  margin-bottom: 5px;
-}
-
-.solved-items {
-  font-weight: normal;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .solved-items {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .solved-word {
-  background: rgba(255, 255, 255, 0.85);
-  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #aaa;
+  padding: 8px 12px;
   border-radius: 8px;
   font-weight: bold;
-  border: 1px solid #999;
-  min-width: 80px;
-  text-align: center;
+  font-size: 14px;
 }
-
