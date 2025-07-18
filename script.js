@@ -1,3 +1,8 @@
+function startGame() {
+  document.getElementById("landing").style.display = "none";
+  document.getElementById("game").style.display = "block";
+}
+
 const words = [
   "Blue", "Red", "Green", "Yellow",
   "Beagle", "Poodle", "Dalmatian", "Boxer",
