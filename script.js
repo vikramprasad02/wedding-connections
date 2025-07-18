@@ -59,11 +59,13 @@ function renderGrid() {
   shuffle(words).forEach(word => {
     const div = document.createElement("div");
     div.className = "cell";
+    div.classList.add(word.includes(" ") ? "two-word" : "one-word");
     div.innerText = word.toUpperCase();
     div.onclick = () => toggleSelect(div);
     grid.appendChild(div);
   });
 }
+
 
 function toggleSelect(cell) {
   if (cell.classList.contains("correct")) return;
