@@ -5,19 +5,25 @@ const words = [
   "Fiddle", "Middle", "Riddle", "Diddle"
 ];
 
-const answers = [
-  ["Blue", "Red", "Green", "Yellow"],           // Yellow
-  ["Beagle", "Poodle", "Dalmatian", "Boxer"],   // Green
-  ["Waffle", "Pancake", "Muffin", "Bagel"],     // Blue
-  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Purple
+// Base64-encoded word groups
+const encodedAnswers = [
+  "Qmx1ZSxSZWQsR3JlZW4sWWVsbG93",                            // Colors
+  "QmVhZ2xlLFBvb2RsZSxEYWxtYXRpYW4sQm94ZXI=",                // Dog breeds
+  "V2FmZmxlLFBhbmNha2UsTXVmZmluLEJhZ2Vs",                    // Breakfast foods
+  "RmlkZGxlLE1pZGRsZSxSaWRkbGUsRGlkZGxl"                     // Rhyming words
 ];
 
-const categoryLabels = [
-  "Colors",
-  "Dog Breeds",
-  "Breakfast Foods",
-  "Words That Rhyme"
+// (Optional) Encoded category labels — in case you show them later
+const encodedCategories = [
+  "Q29sb3Jz",               // "Colors"
+  "RG9ncyBCcmVlZHM=",       // "Dogs Breeds"
+  "QnJlYWtmYXN0IEZvb2Rz",   // "Breakfast Foods"
+  "UnloaW1pbmcgV29yZHM="    // "Rhyming Words"
 ];
+
+// Decode them
+const answers = encodedAnswers.map(group => atob(group).split(","));
+const categoryLabels = encodedCategories.map(label => atob(label));
 
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
 
