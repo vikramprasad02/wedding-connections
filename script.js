@@ -5,21 +5,50 @@ const words = [
   "Fiddle", "Middle", "Riddle", "Diddle"
 ];
 
-// Base64-encoded word groups
-const encodedAnswers = [
-  "Qmx1ZSxSZWQsR3JlZW4sWWVsbG93",                            // Colors
-  "QmVhZ2xlLFBvb2RsZSxEYWxtYXRpYW4sQm94ZXI=",                // Dog breeds
-  "V2FmZmxlLFBhbmNha2UsTXVmZmluLEJhZ2Vs",                    // Breakfast foods
-  "RmlkZGxlLE1pZGRsZSxSaWRkbGUsRGlkZGxl"                     // Rhyming words
-];
+// Switch between "DUMMY" and "PROD"
+const MODE = "PROD";
 
-// (Optional) Encoded category labels — in case you show them later
-const encodedCategories = [
-  "Q29sb3Jz",               // "Colors"
-  "RG9ncyBCcmVlZHM=",       // "Dogs Breeds"
-  "QnJlYWtmYXN0IEZvb2Rz",   // "Breakfast Foods"
-  "UnloaW1pbmcgV29yZHM="    // "Rhyming Words"
-];
+const GAME_DATA = {
+  DUMMY: {
+    encodedAnswers: [
+      "Qmx1ZSxSZWQsR3JlZW4sWWVsbG93",
+      "QmVhZ2xlLFBvb2RsZSxEYWxtYXRpYW4sQm94ZXI=",
+      "V2FmZmxlLFBhbmNha2UsTXVmZmluLEJhZ2Vs",
+      "RmlkZGxlLE1pZGRsZSxSaWRkbGUsRGlkZGxl"
+    ],
+    encodedLabels: [
+      "Q29sb3Jz",
+      "RG9nIEJyZWVkcw==",
+      "QnJlYWtmYXN0IEZvb2Rz",
+      "UnloaW1pbmcgV29yZHM="
+    ]
+  },
+  PROD: {
+    encodedAnswers: [
+      "QW1zdGVyZGFtLFJvbWUsTmljZSxNYWRyaWQ=",
+      "RW1pbmVtLEdyZWF0IExha2VzLFBpc3RvbnMsVGhlIEhlbnJ5",
+      "RHJpZnQsU3RhdGlvbixUb3dlcixWaWNl",
+      "RGV0b3VyLERvbG9yZXMsUHVuY2hsaW5lLFNwaW4="
+    ],
+    encodedLabels: [
+      "RVVSTyBDSVRJRVMgV0UnVkUgVklTSVRFRCBUT0dFVEhFUg==",
+      "SUNPTlMgT0YgTUlDSElHQU4=",
+      "VE9LWTAgX19fX19fXw==",
+      "U09NRSBPRiBPUVIgU0YgREFURSBTUE9UUw=="
+    ]
+  }
+};
+
+const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
+const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
+
+
+// Decode selected data
+const answers = GAME_DATA[MODE].encodedAnswers.map(encoded =>
+  atob(encoded).split(",")
+);
+const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
+
 
 // Decode them
 const answers = encodedAnswers.map(group => atob(group).split(","));
