@@ -1,15 +1,15 @@
 const words = [
-  "Amsterdam", "Rome", "Nice", "Madrid",
-  "Yates", "Somerset", "Buddy's", "The Henry",
-  "Spin", "Detour", "Punchline", "Dolores",
-  "Tower", "Station", "Vice", "Drift"
+  "Blue", "Red", "Green", "Yellow",
+  "Beagle", "Poodle", "Dalmatian", "Boxer",
+  "Waffle", "Pancake", "Muffin", "Bagel",
+  "Fiddle", "Middle", "Riddle", "Diddle"
 ];
 
 const answers = [
-  ["Amsterdam", "Rome", "Nice", "Madrid"],
-  ["Yates", "Somerset", "Buddy's", "The Henry"],
-  ["Spin", "Detour", "Punchline", "Dolores"],
-  ["Tower", "Station", "Vice", "Drift"]
+  ["Blue", "Red", "Green", "Yellow"],           // Colors
+  ["Beagle", "Poodle", "Dalmatian", "Boxer"],   // Dog Breeds
+  ["Waffle", "Pancake", "Muffin", "Bagel"],     // Breakfast Foods
+  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Rhyming Words
 ];
 
 const grid = document.getElementById("grid");
