@@ -1,4 +1,3 @@
-<!-- Trigger GitHub Pages build -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +7,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Wedding Connections</h1>
-  <p>Select 4 related words and click "Submit Guess"</p>
 
-  <div id="grid"></div>
-  <button onclick="submitGuess()">Submit Guess</button>
-  <button onclick="revealAnswers()">Reveal All</button>
+  <!-- Landing Page -->
+  <div id="landing">
+    <h1>Welcome to Wedding Connections 💍</h1>
+    <p>
+      We're so excited you're here! To kick off the celebration, we created a game inspired by our lives together.<br/>
+      Tap below to begin — and have fun playing!
+    </p>
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <!-- Game Page -->
+  <div id="game" style="display: none;">
+    <h1>Wedding Connections</h1>
+    <p>Select 4 related words and click "Submit Guess"</p>
+
+    <div id="grid"></div>
+    <button onclick="submitGuess()">Submit Guess</button>
+    <button onclick="revealAnswers()">Reveal All</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
