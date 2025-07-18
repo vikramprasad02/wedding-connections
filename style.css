@@ -45,11 +45,12 @@ button:hover {
 /* Game Grid */
 #grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
   gap: 12px;
   justify-items: center;
   margin: 30px auto;
   max-width: 460px;
+  padding: 0 12px;
 }
 
 /* Grid Cells */
@@ -58,14 +59,16 @@ button:hover {
   border: 2px solid #ccc;
   border-radius: 10px;
   width: 100%;
-  padding: 20px 0;
+  max-width: 100px;
+  padding: 14px 4px;
   text-align: center;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   user-select: none;
   transition: background 0.2s, transform 0.1s;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  word-wrap: break-word;
 }
 
 .cell:hover {
