@@ -23,6 +23,7 @@ body {
   border-color: #f90;
 }
 .cell.correct {
-  background: #b3e5b3;
-  border-color: #2e7d32;
+  color: black;
+  font-weight: bold;
 }
+

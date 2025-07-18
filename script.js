@@ -6,11 +6,13 @@ const words = [
 ];
 
 const answers = [
-  ["Blue", "Red", "Green", "Yellow"],
-  ["Beagle", "Poodle", "Dalmatian", "Boxer"],
-  ["Waffle", "Pancake", "Muffin", "Bagel"],
-  ["Fiddle", "Middle", "Riddle", "Diddle"]
+  ["Blue", "Red", "Green", "Yellow"],           // Yellow (easiest)
+  ["Beagle", "Poodle", "Dalmatian", "Boxer"],   // Green
+  ["Waffle", "Pancake", "Muffin", "Bagel"],     // Blue
+  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Purple (hardest)
 ];
+
+const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
 
 let player = {
   firstName: "",
@@ -21,6 +23,7 @@ let player = {
 };
 
 let solvedGroups = 0;
+let matchedGroups = [];
 
 function startGame() {
   const first = document.getElementById("firstName").value.trim();
@@ -48,8 +51,6 @@ function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
 
-let selected = [];
-
 function renderGrid() {
   grid.innerHTML = "";
   shuffle(words).forEach(word => {
@@ -63,10 +64,15 @@ function renderGrid() {
 
 function toggleSelect(cell) {
   if (cell.classList.contains("correct")) return;
+
   cell.classList.toggle("selected");
   const selectedCells = document.querySelectorAll(".cell.selected");
   if (selectedCells.length > 4) {
     selectedCells[0].classList.remove("selected");
+  }
+
+  if (selectedCells.length === 4) {
+    setTimeout(submitGuess, 150); // slight delay for UI feedback
   }
 }
 
@@ -74,24 +80,24 @@ function submitGuess() {
   const selectedCells = [...document.querySelectorAll(".cell.selected")];
   const selectedWords = selectedCells.map(cell => cell.innerText);
 
-  if (selectedWords.length !== 4) {
-    alert("Select exactly 4 words.");
-    return;
-  }
-
-  const matchedGroup = answers.find(group =>
-    group.every(word => selectedWords.includes(word))
+  const matchedIndex = answers.findIndex(group =>
+    group.every(word => selectedWords.includes(word)) &&
+    !matchedGroups.includes(group.toString())
   );
 
-  if (matchedGroup) {
+  if (matchedIndex !== -1) {
     const now = Date.now();
     const timeTaken = (now - player.currentGroupStart) / 1000;
     player.groupTimes.push(timeTaken.toFixed(2));
     player.currentGroupStart = now;
 
+    matchedGroups.push(answers[matchedIndex].toString());
+
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("correct");
+      cell.style.backgroundColor = colors[matchedIndex];
+      cell.style.borderColor = "#444";
       cell.onclick = null;
     });
 
@@ -105,7 +111,7 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
     }
 
   } else {
-    alert("Incorrect group. Try again!");
+    // Not a match
     selectedCells.forEach(cell => cell.classList.remove("selected"));
   }
 }
@@ -113,9 +119,18 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
 function revealAnswers() {
   document.querySelectorAll(".cell").forEach(cell => {
     const word = cell.innerText;
-    if (answers.some(group => group.includes(word))) {
-      cell.classList.add("correct");
-      cell.onclick = null;
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i].includes(word)) {
+        cell.classList.add("correct");
+        cell.style.backgroundColor = colors[i];
+        cell.style.borderColor = "#444";
+        cell.onclick = null;
+      }
     }
   });
+}
+
+// Manual Shuffle Button
+function reshuffleGrid() {
+  renderGrid();
 }
