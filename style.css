@@ -1,86 +1,92 @@
-/* Base Layout */
+/* Fonts and Layout */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Inter', sans-serif;
   background: #fdf6f0;
-  color: #333;
+  color: #111;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
-#container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 28px;
+  margin: 20px 0 10px;
 }
 
-/* Inputs & Buttons */
-input {
-  margin: 5px;
-  padding: 8px;
+p {
+  margin: 10px 0 20px;
   font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
 }
 
+#container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Buttons */
 button {
   margin: 15px 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background: #eee;
-  border: 1px solid #999;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
   border-radius: 8px;
   transition: background 0.2s ease;
 }
 
 button:hover {
-  background: #ddd;
+  background: #e2e2e2;
 }
 
-/* Grid & Solved Areas */
+/* Game Grid */
 #grid {
   display: grid;
-  grid-template-columns: repeat(4, 110px);
-  gap: 16px 20px; /* row gap, column gap */
-  justify-content: center;
-  margin-top: 30px;
-}
-
-#solved {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 30px auto 10px;
-  max-width: 500px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  justify-items: center;
+  margin: 30px auto;
+  max-width: 460px;
 }
 
 /* Grid Cells */
 .cell {
-  border: 2px solid #aaa;
-  padding: 15px;
-  width: 100px;
+  background: #f5f5f5;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px 0;
   text-align: center;
-  cursor: pointer;
-  background: white;
-  border-radius: 8px;
-  user-select: none;
-  transition: all 0.2s ease;
   font-weight: bold;
+  font-size: 16px;
+  user-select: none;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.cell:hover {
+  background: #ececec;
 }
 
 .cell.selected {
-  background: #ffefd5;
-  border-color: #f90;
+  background: #fff3c4;
+  border-color: #f4bb00;
 }
 
 .cell.correct {
-  color: black;
-  border-color: #444;
+  background: #d1ffd1;
+  border-color: #2e7d32;
   cursor: default;
 }
 
-/* Shake Animation */
+.cell.shake {
+  animation: shake 0.4s ease;
+}
+
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -89,11 +95,15 @@ button:hover {
   100% { transform: translateX(0); }
 }
 
-.cell.shake {
-  animation: shake 0.4s ease;
+/* Solved Groups */
+#solved {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px auto 10px;
+  max-width: 500px;
 }
 
-/* Solved Group Cards */
 .solved-card {
   padding: 15px 20px;
   border-radius: 10px;
@@ -106,6 +116,8 @@ button:hover {
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
 }
 
 .solved-items {
@@ -122,12 +134,3 @@ button:hover {
   font-weight: bold;
   font-size: 14px;
 }
-
-h1 {
-  margin-bottom: 10px;
-}
-
-p {
-  margin: 0 0 20px;
-}
-

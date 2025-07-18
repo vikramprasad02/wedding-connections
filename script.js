@@ -19,37 +19,14 @@ const categoryLabels = [
   "Words That Rhyme"
 ];
 
-
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
-
-let player = {
-  firstName: "",
-  lastName: "",
-  startTime: null,
-  groupTimes: [],
-  currentGroupStart: null
-};
 
 let solvedGroups = 0;
 let matchedGroups = [];
 
 function startGame() {
-  const first = document.getElementById("firstName").value.trim();
-  const last = document.getElementById("lastName").value.trim();
-
-  if (!first || !last) {
-    alert("Please enter both your first and last name.");
-    return;
-  }
-
-  player.firstName = first;
-  player.lastName = last;
-  player.startTime = Date.now();
-  player.currentGroupStart = Date.now();
-
   document.getElementById("landing").style.display = "none";
   document.getElementById("game").style.display = "block";
-
   renderGrid();
 }
 
@@ -94,21 +71,16 @@ function submitGuess() {
   );
 
   if (matchedIndex !== -1) {
-    const now = Date.now();
-    const timeTaken = (now - player.currentGroupStart) / 1000;
-    player.groupTimes.push(timeTaken.toFixed(2));
-    player.currentGroupStart = now;
-
     matchedGroups.push(answers[matchedIndex].toString());
 
-    // ✅ Build NYT-style solved block
+    // Create solved card
     const card = document.createElement("div");
     card.className = "solved-card";
     card.style.backgroundColor = colors[matchedIndex];
 
     const title = document.createElement("div");
     title.className = "solved-title";
-    title.innerText = categoryLabels[matchedIndex].toUpperCase();
+    title.innerText = categoryLabels[matchedIndex];
 
     const items = document.createElement("div");
     items.className = "solved-items";
@@ -124,20 +96,11 @@ function submitGuess() {
     card.appendChild(items);
     document.getElementById("solved").appendChild(card);
 
-    // 🧹 Remove those words from the grid
+    // Remove matched words
     selectedCells.forEach(cell => cell.remove());
 
     solvedGroups++;
-
-    if (solvedGroups === answers.length) {
-      const totalTime = (now - player.startTime) / 1000;
-      alert(`🎉 Well done, ${player.firstName} ${player.lastName}!\n
-You solved all ${answers.length} groups in ${totalTime.toFixed(2)} seconds.\n
-Group times: ${player.groupTimes.join(", ")} seconds.`);
-    }
-
   } else {
-    // Shake for incorrect guess
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("shake");
@@ -146,9 +109,7 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
   }
 }
 
-
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
-  const container = document.getElementById("grid");
-  shuffle(allCells).forEach(cell => container.appendChild(cell));
+  shuffle(allCells).forEach(cell => grid.appendChild(cell));
 }
