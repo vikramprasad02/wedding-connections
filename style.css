@@ -11,7 +11,7 @@ body {
 #container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
 /* Inputs & Buttons */
@@ -41,10 +41,10 @@ button:hover {
 /* Grid & Solved Areas */
 #grid {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  gap: 10px;
+  grid-template-columns: repeat(4, 110px);
+  gap: 16px 20px; /* row gap, column gap */
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #solved {
@@ -122,3 +122,12 @@ button:hover {
   font-weight: bold;
   font-size: 14px;
 }
+
+h1 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0 0 20px;
+}
+
