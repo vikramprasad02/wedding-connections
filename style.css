@@ -61,3 +61,23 @@ button {
 .cell.shake {
   animation: shake 0.4s ease;
 }
+
+.solved-card {
+  border-radius: 10px;
+  color: #111;
+  padding: 10px;
+  width: 85%;
+  margin: 10px auto;
+  font-weight: bold;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+.solved-title {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.solved-items {
+  font-weight: normal;
+}
+
