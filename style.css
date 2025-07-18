@@ -4,26 +4,60 @@ body {
   background: #fdf6f0;
   color: #333;
 }
+
+input {
+  margin: 5px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#solved,
 #grid {
   display: grid;
   grid-template-columns: repeat(4, 100px);
   gap: 10px;
   justify-content: center;
-  margin: 20px 0;
+  margin-top: 20px;
 }
+
 .cell {
   border: 2px solid #aaa;
   padding: 15px;
+  width: 100px;
+  text-align: center;
   cursor: pointer;
   background: white;
   border-radius: 8px;
+  user-select: none;
+  transition: all 0.2s ease;
 }
+
 .cell.selected {
   background: #ffefd5;
   border-color: #f90;
 }
+
 .cell.correct {
   color: black;
   font-weight: bold;
+  border-color: #444;
 }
 
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.cell.shake {
+  animation: shake 0.4s ease;
+}

@@ -6,10 +6,10 @@ const words = [
 ];
 
 const answers = [
-  ["Blue", "Red", "Green", "Yellow"],           // Yellow (easiest)
+  ["Blue", "Red", "Green", "Yellow"],           // Yellow
   ["Beagle", "Poodle", "Dalmatian", "Boxer"],   // Green
   ["Waffle", "Pancake", "Muffin", "Bagel"],     // Blue
-  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Purple (hardest)
+  ["Fiddle", "Middle", "Riddle", "Diddle"]      // Purple
 ];
 
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
@@ -72,7 +72,7 @@ function toggleSelect(cell) {
   }
 
   if (selectedCells.length === 4) {
-    setTimeout(submitGuess, 150); // slight delay for UI feedback
+    setTimeout(submitGuess, 150);
   }
 }
 
@@ -93,12 +93,14 @@ function submitGuess() {
 
     matchedGroups.push(answers[matchedIndex].toString());
 
+    const solvedContainer = document.getElementById("solved");
+
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("correct");
       cell.style.backgroundColor = colors[matchedIndex];
-      cell.style.borderColor = "#444";
       cell.onclick = null;
+      solvedContainer.appendChild(cell);
     });
 
     solvedGroups++;
@@ -111,26 +113,16 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
     }
 
   } else {
-    // Not a match
-    selectedCells.forEach(cell => cell.classList.remove("selected"));
+    selectedCells.forEach(cell => {
+      cell.classList.remove("selected");
+      cell.classList.add("shake");
+      setTimeout(() => cell.classList.remove("shake"), 400);
+    });
   }
 }
 
-function revealAnswers() {
-  document.querySelectorAll(".cell").forEach(cell => {
-    const word = cell.innerText;
-    for (let i = 0; i < answers.length; i++) {
-      if (answers[i].includes(word)) {
-        cell.classList.add("correct");
-        cell.style.backgroundColor = colors[i];
-        cell.style.borderColor = "#444";
-        cell.onclick = null;
-      }
-    }
-  });
-}
-
-// Manual Shuffle Button
 function reshuffleGrid() {
-  renderGrid();
+  const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
+  const container = document.getElementById("grid");
+  shuffle(allCells).forEach(cell => container.appendChild(cell));
 }
