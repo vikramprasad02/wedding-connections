@@ -24,7 +24,7 @@ const GAME_DATA = {
       "RGV0b3VyLERvbG9yZXMsUHVuY2hsaW5lLFNwaW4="
     ],
     encodedLabels: [
-      "RVVST1BFQU4gQ0lUSUVTIFdFJ1ZFIElOU1BFQ1RFRCBUT0dFVEhFUg==",
+      "RVVST1BFQU4gQ0lUSUVTIFdFIEhBVkUgVklTSVRFRCBUT0dFVEhFUg==",
       "SUNPTlMgT0YgTUlDSElHQU4=",
       "VE9LWU8gX19fX19f",
       "U09NRSBPRiBPVVIgU0YgREFURSBTUE9UUw=="
@@ -37,8 +37,7 @@ const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
 const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
 const words = answers.flat();
 
-
-const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
+const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"];
 
 let solvedGroups = 0;
 let matchedGroups = [];
@@ -84,8 +83,8 @@ function submitGuess() {
   const selectedCells = [...document.querySelectorAll(".cell.selected")];
   const selectedWords = selectedCells.map(cell => cell.innerText.toUpperCase());
 
-  const matchedIndex = answers.findIndex((group, i) => {
-    const groupUpper = group.map(w => w.toUpperCase());
+  const matchedIndex = answers.findIndex(group => {
+    const groupUpper = group.map(word => word.toUpperCase());
     return groupUpper.every(word => selectedWords.includes(word)) &&
            !matchedGroups.includes(group.toString());
   });
@@ -93,7 +92,6 @@ function submitGuess() {
   if (matchedIndex !== -1) {
     matchedGroups.push(answers[matchedIndex].toString());
 
-    // Create solved card
     const card = document.createElement("div");
     card.className = "solved-card";
     card.style.backgroundColor = colors[matchedIndex];
@@ -116,7 +114,6 @@ function submitGuess() {
     card.appendChild(items);
     document.getElementById("solved").appendChild(card);
 
-    // Remove matched words from grid
     selectedCells.forEach(cell => cell.remove());
 
     solvedGroups++;
@@ -128,7 +125,6 @@ function submitGuess() {
     });
   }
 }
-
 
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
