@@ -12,6 +12,14 @@ const answers = [
   ["Fiddle", "Middle", "Riddle", "Diddle"]      // Purple
 ];
 
+const categoryLabels = [
+  "Colors",
+  "Dog Breeds",
+  "Breakfast Foods",
+  "Words That Rhyme"
+];
+
+
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
 
 let player = {
@@ -93,15 +101,31 @@ function submitGuess() {
 
     matchedGroups.push(answers[matchedIndex].toString());
 
-    const solvedContainer = document.getElementById("solved");
+    // ✅ Build NYT-style solved block
+    const card = document.createElement("div");
+    card.className = "solved-card";
+    card.style.backgroundColor = colors[matchedIndex];
 
-    selectedCells.forEach(cell => {
-      cell.classList.remove("selected");
-      cell.classList.add("correct");
-      cell.style.backgroundColor = colors[matchedIndex];
-      cell.onclick = null;
-      solvedContainer.appendChild(cell);
+    const title = document.createElement("div");
+    title.className = "solved-title";
+    title.innerText = categoryLabels[matchedIndex].toUpperCase();
+
+    const items = document.createElement("div");
+    items.className = "solved-items";
+
+    answers[matchedIndex].forEach(word => {
+      const w = document.createElement("div");
+      w.className = "solved-word";
+      w.innerText = word;
+      items.appendChild(w);
     });
+
+    card.appendChild(title);
+    card.appendChild(items);
+    document.getElementById("solved").appendChild(card);
+
+    // 🧹 Remove those words from the grid
+    selectedCells.forEach(cell => cell.remove());
 
     solvedGroups++;
 
@@ -113,6 +137,7 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
     }
 
   } else {
+    // Shake for incorrect guess
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("shake");
@@ -120,6 +145,7 @@ Group times: ${player.groupTimes.join(", ")} seconds.`);
     });
   }
 }
+
 
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];

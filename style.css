@@ -81,3 +81,20 @@ button {
   font-weight: normal;
 }
 
+.solved-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.solved-word {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: 1px solid #999;
+  min-width: 80px;
+  text-align: center;
+}
+
