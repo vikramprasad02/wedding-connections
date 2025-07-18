@@ -1,11 +1,4 @@
-const words = [
-  "Blue", "Red", "Green", "Yellow",
-  "Beagle", "Poodle", "Dalmatian", "Boxer",
-  "Waffle", "Pancake", "Muffin", "Bagel",
-  "Fiddle", "Middle", "Riddle", "Diddle"
-];
-
-// Switch between "DUMMY" and "PROD"
+// Set to "DUMMY" or "PROD"
 const MODE = "PROD";
 
 const GAME_DATA = {
@@ -39,20 +32,10 @@ const GAME_DATA = {
   }
 };
 
+// Decode selected data
 const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
 const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
-
-
-// Decode selected data
-const answers = GAME_DATA[MODE].encodedAnswers.map(encoded =>
-  atob(encoded).split(",")
-);
-const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
-
-
-// Decode them
-const answers = encodedAnswers.map(group => atob(group).split(","));
-const categoryLabels = encodedCategories.map(label => atob(label));
+const words = answers.flat();
 
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
 
@@ -131,7 +114,7 @@ function submitGuess() {
     card.appendChild(items);
     document.getElementById("solved").appendChild(card);
 
-    // Remove matched words
+    // Remove matched words from grid
     selectedCells.forEach(cell => cell.remove());
 
     solvedGroups++;
