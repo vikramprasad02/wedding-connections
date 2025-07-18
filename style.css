@@ -1,4 +1,4 @@
-/* Fonts and Layout */
+/* Base Layout */
 body {
   font-family: 'Inter', sans-serif;
   background: #fdf6f0;
@@ -20,26 +20,11 @@ p {
   font-size: 16px;
 }
 
+/* Container if you use one */
 #container {
   max-width: 700px;
   margin: 0 auto;
   padding: 20px 16px;
-}
-
-/* Buttons */
-button {
-  margin: 20px 0;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-
-button:hover {
-  background: #e2e2e2;
 }
 
 /* Game Grid */
@@ -47,80 +32,55 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  justify-content: center;
-  align-items: center;
-  max-width: 420px;
-  margin: 30px auto;
+  justify-items: center;
+  margin: 24px auto;
+  max-width: 380px;
   padding: 0 12px;
 }
 
-/* Grid Cells */
+/* Cell Styles */
 .cell {
   background: #f5f5f5;
   border: 2px solid #ccc;
   border-radius: 10px;
   width: 100%;
-  max-width: 90px;
-  height: 64px;
-  padding: 6px;
+  max-width: 80px;
+  height: 60px;
+  padding: 4px;
   text-align: center;
-  font-weight: bold;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: clamp(12px, 3vw, 14px);
   user-select: none;
-  transition: background 0.2s, transform 0.1s;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  line-height: 1.2;
-  overflow-wrap: break-word;
-}
-
-
-/* One-word terms: no wrap, shrink if needed */
-.cell.one-word {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: clamp(12px, 3.5vw, 16px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Two-word terms: allow wrapping */
-.cell.two-word {
-  white-space: normal;
-  font-size: 14px;
-}
-
+/* Cell States */
 .cell:hover {
   background: #ececec;
 }
-
 .cell.selected {
   background: #fff3c4;
   border-color: #f4bb00;
 }
-
 .cell.correct {
   background: #d1ffd1;
   border-color: #2e7d32;
   cursor: default;
 }
-
 .cell.shake {
   animation: shake 0.4s ease;
 }
 
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-/* Solved Groups */
+/* Solved Group Display */
 #solved {
   display: flex;
   flex-direction: column;
@@ -159,4 +119,30 @@ button:hover {
   border-radius: 8px;
   font-weight: bold;
   font-size: 14px;
+}
+
+/* Button Styling */
+button {
+  margin: 24px auto;
+  padding: 10px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  display: block;
+}
+
+button:hover {
+  background: #e2e2e2;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
