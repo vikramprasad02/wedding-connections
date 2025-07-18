@@ -1,60 +1,90 @@
+/* Fonts and Layout */
 body {
-  font-family: sans-serif;
-  text-align: center;
+  font-family: 'Inter', sans-serif;
   background: #fdf6f0;
-  color: #333;
+  color: #111;
+  text-align: center;
   margin: 0;
   padding: 0;
 }
 
-#game {
-  max-width: 600px;
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 28px;
+  margin: 20px 0 10px;
+}
+
+p {
+  margin: 10px 0 20px;
+  font-size: 16px;
+}
+
+#container {
+  max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 16px;
 }
 
-#solved, #grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
-  justify-items: center;
-  margin-top: 20px;
-  padding: 0 10px;
-}
-
-.cell {
-  border: 2px solid #aaa;
-  padding: 15px;
-  width: 100%;
-  max-width: 100px;
-  text-align: center;
+/* Buttons */
+button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  background: white;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
   border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #e2e2e2;
+}
+
+/* Game Grid */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  justify-items: center;
+  margin: 30px auto;
+  max-width: 460px;
+}
+
+/* Grid Cells */
+.cell {
+  background: #f5f5f5;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
   user-select: none;
-  transition: all 0.2s ease;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.cell:hover {
+  background: #ececec;
 }
 
 .cell.selected {
-  background: #ffefd5;
-  border-color: #f90;
+  background: #fff3c4;
+  border-color: #f4bb00;
 }
 
 .cell.correct {
-  color: black;
-  font-weight: bold;
-  border-color: #444;
+  background: #d1ffd1;
+  border-color: #2e7d32;
+  cursor: default;
 }
 
-button {
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  display: block;
-  cursor: pointer;
-  border-radius: 8px;
-  border: 2px solid #ccc;
-  background-color: white;
+.cell.shake {
+  animation: shake 0.4s ease;
 }
 
 @keyframes shake {
@@ -65,6 +95,43 @@ button {
   100% { transform: translateX(0); }
 }
 
-.cell.shake {
-  animation: shake 0.4s ease;
+/* Solved Groups */
+#solved {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px auto 10px;
+  max-width: 500px;
+}
+
+.solved-card {
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #111;
+}
+
+.solved-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.solved-items {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.solved-word {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #aaa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
 }
