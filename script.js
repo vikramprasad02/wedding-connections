@@ -24,10 +24,10 @@ const GAME_DATA = {
       "RGV0b3VyLERvbG9yZXMsUHVuY2hsaW5lLFNwaW4="
     ],
     encodedLabels: [
-      "RVVSTyBDSVRJRVMgV0UnVkUgVklTSVRFRCBUT0dFVEhFUg==",
+      "RVVST1BFQU4gQ0lUSUVTIFdFJ1ZFIElOU1BFQ1RFRCBUT0dFVEhFUg==",
       "SUNPTlMgT0YgTUlDSElHQU4=",
-      "VE9LWTAgX19fX19fXw==",
-      "U09NRSBPRiBPUVIgU0YgREFURSBTUE9UUw=="
+      "VE9LWU8gX19fX19f",
+      "U09NRSBPRiBPVVIgU0YgREFURSBTUE9UUw=="
     ]
   }
 };
@@ -36,6 +36,7 @@ const GAME_DATA = {
 const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
 const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
 const words = answers.flat();
+
 
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"]; // yellow, green, blue, purple
 
@@ -59,7 +60,7 @@ function renderGrid() {
   shuffle(words).forEach(word => {
     const div = document.createElement("div");
     div.className = "cell";
-    div.innerText = word;
+    div.innerText = word.toUpperCase();
     div.onclick = () => toggleSelect(div);
     grid.appendChild(div);
   });
@@ -81,12 +82,13 @@ function toggleSelect(cell) {
 
 function submitGuess() {
   const selectedCells = [...document.querySelectorAll(".cell.selected")];
-  const selectedWords = selectedCells.map(cell => cell.innerText);
+  const selectedWords = selectedCells.map(cell => cell.innerText.toUpperCase());
 
-  const matchedIndex = answers.findIndex(group =>
-    group.every(word => selectedWords.includes(word)) &&
-    !matchedGroups.includes(group.toString())
-  );
+  const matchedIndex = answers.findIndex((group, i) => {
+    const groupUpper = group.map(w => w.toUpperCase());
+    return groupUpper.every(word => selectedWords.includes(word)) &&
+           !matchedGroups.includes(group.toString());
+  });
 
   if (matchedIndex !== -1) {
     matchedGroups.push(answers[matchedIndex].toString());
@@ -106,7 +108,7 @@ function submitGuess() {
     answers[matchedIndex].forEach(word => {
       const w = document.createElement("div");
       w.className = "solved-word";
-      w.innerText = word;
+      w.innerText = word.toUpperCase();
       items.appendChild(w);
     });
 
@@ -126,6 +128,7 @@ function submitGuess() {
     });
   }
 }
+
 
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
