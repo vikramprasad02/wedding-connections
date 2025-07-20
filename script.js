@@ -59,6 +59,23 @@ function renderGrid() {
   shuffle(words).forEach(word => {
     const div = document.createElement("div");
     div.className = "cell";
+
+    const isTwoWord = word.trim().includes(" ");
+    const wordLength = word.replace(/\s/g, "").length;
+
+    if (isTwoWord) {
+      div.classList.add("two-line");
+    } else {
+      div.classList.add("one-line");
+
+      // Dynamically shrink long one-word terms
+      if (wordLength >= 9) {
+        div.style.fontSize = "10.5px";
+      } else if (wordLength >= 7) {
+        div.style.fontSize = "14px";
+      }
+    }
+
     div.innerText = word.toUpperCase();
     div.onclick = () => toggleSelect(div);
     grid.appendChild(div);

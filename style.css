@@ -28,39 +28,70 @@ p {
 }
 
 /* Game Grid */
+/*#grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 360px;
+  margin: 32px auto;
+  padding: 0;
+}*/
+
 #grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  justify-items: center;
-  margin: 24px auto;
-  max-width: 380px;
-  padding: 0 12px;
+  width: fit-content;
+  margin: 32px auto;
 }
 
-/* Cell Styles */
 .cell {
   background: #f5f5f5;
   border: 2px solid #ccc;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 80px;
-  height: 60px;
-  padding: 4px;
-  text-align: center;
+  border-radius: 12px;
+  /*font-family: 'Inter Tight', sans-serif;*/
+  font-family: 'Franklin Gothic Medium', 'Inter Tight', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  font-size: clamp(12px, 3vw, 14px);
-  user-select: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   text-transform: uppercase;
+  user-select: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* 💡 THE IMPORTANT FIXED DIMENSIONS */
+  width: 80px;
+  height: 80px;
+}
+
+/* One-line (AMSTERDAM, MADRID, etc.) */
+.cell.one-line {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cell.two-line {
+  white-space: normal !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.05;
+  padding: 0px 4px;
+  font-size: 13px;
+
+  /* ✨ Force even wrapping */
+  word-break: break-word;
+  max-width: 70px; /* keep inner text from stretching tile visually */
+  text-align: center;
 }
 
 /* Cell States */
