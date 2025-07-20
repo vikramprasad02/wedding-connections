@@ -48,39 +48,7 @@ const submitBtn = document.getElementById("submit-btn");
 const clearBtn = document.getElementById("clear-btn");
 
 function startGame() {
-  // Reset all game state
-  solvedGroups = 0;
-  matchedGroups = [];
-  guessHistory = [];
-  
-  // Clear solved categories
-  document.getElementById("solved").innerHTML = "";
-  
-  // Reset button row to original game buttons
-  const buttonRow = document.getElementById("button-row");
-  buttonRow.innerHTML = `
-    <button onclick="reshuffleGrid()" class="small-btn">Shuffle</button>
-    <button id="clear-btn" class="medium-btn">Deselect All</button>
-    <button id="submit-btn" class="small-btn" disabled>Submit</button>
-  `;
-  
-  // Re-attach event listeners
-  document.getElementById("clear-btn").onclick = () => {
-    document.querySelectorAll(".cell.selected").forEach(cell => {
-      cell.classList.remove("selected");
-    });
-    submitBtn.disabled = true;
-  };
-  
-  document.getElementById("submit-btn").onclick = () => {
-    if (!submitBtn.disabled) {
-      submitGuess();
-    }
-  };
-  
-  // Show game page and render new grid
   document.getElementById("landing").style.display = "none";
-  document.getElementById("results").style.display = "none";
   document.getElementById("game").style.display = "block";
   renderGrid();
 }
