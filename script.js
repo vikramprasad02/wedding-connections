@@ -84,14 +84,23 @@ function renderGrid() {
 
 function toggleSelect(cell) {
   if (cell.classList.contains("correct")) return;
-  cell.classList.toggle("selected");
-
+  
   const selectedCells = document.querySelectorAll(".cell.selected");
-  if (selectedCells.length > 4) {
-    selectedCells[0].classList.remove("selected");
+  
+  // If cell is already selected, allow deselection
+  if (cell.classList.contains("selected")) {
+    cell.classList.remove("selected");
+  } else {
+    // If trying to select a new cell but already have 4 selected, don't allow it
+    if (selectedCells.length >= 4) {
+      return;
+    }
+    cell.classList.add("selected");
   }
 
-  submitBtn.disabled = selectedCells.length !== 4;
+  // Update submit button state based on current selection count
+  const currentSelectedCells = document.querySelectorAll(".cell.selected");
+  submitBtn.disabled = currentSelectedCells.length !== 4;
 }
 
 function submitGuess() {
