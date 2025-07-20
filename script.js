@@ -37,7 +37,7 @@ const GAME_DATA = {
 const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
 const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
 const words = answers.flat();
-const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"];
+const colors = ["#f6de70", "#9cba59", "#b3c2eb", "#a776b3"];
 
 let solvedGroups = 0;
 let matchedGroups = [];
