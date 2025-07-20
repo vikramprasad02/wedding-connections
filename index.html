@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wedding Connections</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&display=swap" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div id="container">
-
     <!-- Landing Page -->
     <div id="landing">
       <h1>Welcome to Wedding Connections 💍</h1>
@@ -29,9 +26,29 @@
 
       <div id="solved"></div>
       <div id="grid"></div>
-      <button onclick="reshuffleGrid()">🔀 Shuffle</button>
+      <div id="controls">
+        <div id="button-row">
+          <button onclick="reshuffleGrid()" class="small-btn">Shuffle</button>
+          <button id="clear-btn" class="medium-btn">Deselect All</button>
+          <button id="submit-btn" class="small-btn" disabled>Submit</button>
+        </div>
+      </div>
+      <div id="completion-message" style="display: none;">
+        <p>You solved it! Take a screenshot and send us your results, we'd love to see it!</p>
+      </div>
     </div>
 
+    <!-- Results Page -->
+    <div id="results" style="display: none;">
+      <h1>You solved it! 🎉</h1>
+      <p>Here's your guessing history:</p>
+      
+      <div id="results-history"></div>
+      
+      <div id="results-controls">
+        <button onclick="showCategories()">View Categories</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
