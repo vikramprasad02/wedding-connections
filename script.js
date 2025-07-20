@@ -88,7 +88,7 @@ function renderGrid() {
 
       // Dynamically shrink long one-word terms
       if (wordLength >= 9) {
-        div.style.fontSize = "9.5px";
+        div.style.fontSize = "10px";
       } else if (wordLength >= 7) {
         div.style.fontSize = "13px";
       }
