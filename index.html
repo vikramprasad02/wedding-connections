@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wedding Connections</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&display=swap" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div id="container">
-
     <!-- Landing Page -->
     <div id="landing">
       <h1>Welcome to Wedding Connections 💍</h1>
@@ -29,9 +26,12 @@
 
       <div id="solved"></div>
       <div id="grid"></div>
-      <button onclick="reshuffleGrid()">🔀 Shuffle</button>
+      <div id="controls">
+        <button id="submit-btn" disabled>Submit</button>
+        <button id="clear-btn">Deselect All</button>
+        <button onclick="reshuffleGrid()">🔀 Shuffle</button>
+      </div>
     </div>
-
   </div>
 
   <script src="script.js"></script>

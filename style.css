@@ -1,3 +1,4 @@
+
 /* Base Layout */
 body {
   font-family: 'Inter', sans-serif;
@@ -20,39 +21,25 @@ p {
   font-size: 16px;
 }
 
-/* Container if you use one */
 #container {
   max-width: 700px;
   margin: 0 auto;
   padding: 20px 16px;
 }
 
-/* Game Grid */
-/*#grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  max-width: 360px;
-  margin: 32px auto;
-  padding: 0;
-}*/
-
 #grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   width: fit-content;
-  margin: 32px auto;
+  margin: 32px auto 16px;
 }
 
 .cell {
-  /*background: #f5f5f5;*/
-  background: #ede9dd; /* parchment-like */
-  color: #111; /* rich black, consistent */
-  /*border: 2px solid #ccc;*/
+  background: #ede9dd;
+  color: #111;
   border: none;
   border-radius: 12px;
-  /*font-family: 'Inter Tight', sans-serif;*/
   font-family: 'Franklin Gothic Medium', 'Inter Tight', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
   font-size: 14px;
@@ -65,15 +52,10 @@ p {
   cursor: pointer;
   overflow: hidden;
   transition: all 0.1s ease;
-  /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);*/
-  box-shadow: none;
-
-  /* 💡 THE IMPORTANT FIXED DIMENSIONS */
   width: 80px;
   height: 80px;
 }
 
-/* One-line (AMSTERDAM, MADRID, etc.) */
 .cell.one-line {
   white-space: nowrap;
   overflow: hidden;
@@ -91,22 +73,14 @@ p {
   line-height: 1.05;
   padding: 0px 4px;
   font-size: 13px;
-
-  /* ✨ Force even wrapping */
   word-break: break-word;
-  max-width: 70px; /* keep inner text from stretching tile visually */
-  text-align: center;
+  max-width: 70px;
 }
 
-/* Cell States */
 .cell:hover {
   background: #ede9dd;
 }
-/*.cell.selected {
-  background: #fff3c4;
-  border-color: #f4bb00;
-}
-*/
+
 .cell.selected {
   background: #3e3e3e;
   color: #fdfdfb;
@@ -118,6 +92,7 @@ p {
   border-color: #2e7d32;
   cursor: default;
 }
+
 .cell.shake {
   animation: shake 0.4s ease;
 }
@@ -125,75 +100,10 @@ p {
 #solved {
   display: flex;
   flex-direction: column;
-  gap: 0px; /* OR remove this line entirely */
+  gap: 0px;
   margin: 4px auto 0;
   max-width: 500px;
 }
-
-
-.solved-card {
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: #111;
-}
-
-.solved-title {
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-family: 'Inter', sans-serif;
-}
-
-.solved-items {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.solved-word {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #aaa;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* NYT-style results (no tiles) */
-.solved-nyt-group {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.solved-nyt-category {
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.solved-nyt-words {
-  font-size: 14px;
-  color: #333;
-}
-
-/* NYT-style block for solved groups */
-/*.solved-block {
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  color: #fff;
-  text-align: center;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-}
-*/ 
 
 .solved-block {
   width: 100%;
@@ -201,7 +111,7 @@ p {
   min-height: 70px;
   border-radius: 10px;
   padding: 10px 14px;
-  margin: 2px auto; /* ⬅️ Tighter vertical spacing above and below */
+  margin: 2px auto;
   background-color: #fff;
   color: #111;
   text-align: center;
@@ -214,20 +124,18 @@ p {
 .solved-block-category {
   font-weight: 800;
   font-size: 16px;
-  color: #111; /* category title in bold black */
+  color: #111;
   margin-bottom: 4px;
   text-transform: uppercase;
 }
 
 .solved-block-words {
   font-size: 14px;
-  color: #111; /* clean, strong black */
+  color: #111;
 }
 
-
-/* Button Styling */
 button {
-  margin: 24px auto;
+  margin: 8px auto;
   padding: 10px 24px;
   font-size: 16px;
   cursor: pointer;
@@ -242,7 +150,13 @@ button:hover {
   background: #e2e2e2;
 }
 
-/* Shake Animation */
+#button-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }

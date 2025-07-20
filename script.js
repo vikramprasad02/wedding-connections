@@ -1,3 +1,5 @@
+// === script.js ===
+
 // Set to "DUMMY" or "PROD"
 const MODE = "PROD";
 
@@ -32,23 +34,23 @@ const GAME_DATA = {
   }
 };
 
-// Decode selected data
 const answers = GAME_DATA[MODE].encodedAnswers.map(a => atob(a).split(","));
 const categoryLabels = GAME_DATA[MODE].encodedLabels.map(atob);
 const words = answers.flat();
-
 const colors = ["#fff176", "#81c784", "#64b5f6", "#ba68c8"];
 
 let solvedGroups = 0;
 let matchedGroups = [];
+
+const grid = document.getElementById("grid");
+const submitBtn = document.getElementById("submit-btn");
+const clearBtn = document.getElementById("clear-btn");
 
 function startGame() {
   document.getElementById("landing").style.display = "none";
   document.getElementById("game").style.display = "block";
   renderGrid();
 }
-
-const grid = document.getElementById("grid");
 
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
@@ -67,8 +69,6 @@ function renderGrid() {
       div.classList.add("two-line");
     } else {
       div.classList.add("one-line");
-
-      // Dynamically shrink long one-word terms
       if (wordLength >= 9) {
         div.style.fontSize = "10.5px";
       } else if (wordLength >= 7) {
@@ -82,67 +82,17 @@ function renderGrid() {
   });
 }
 
-
 function toggleSelect(cell) {
   if (cell.classList.contains("correct")) return;
-
   cell.classList.toggle("selected");
+
   const selectedCells = document.querySelectorAll(".cell.selected");
   if (selectedCells.length > 4) {
     selectedCells[0].classList.remove("selected");
   }
 
-  if (selectedCells.length === 4) {
-    setTimeout(submitGuess, 150);
-  }
+  submitBtn.disabled = selectedCells.length !== 4;
 }
-
-// function submitGuess() {
-//   const selectedCells = [...document.querySelectorAll(".cell.selected")];
-//   const selectedWords = selectedCells.map(cell => cell.innerText.toUpperCase());
-
-//   const matchedIndex = answers.findIndex(group => {
-//     const groupUpper = group.map(word => word.toUpperCase());
-//     return groupUpper.every(word => selectedWords.includes(word)) &&
-//            !matchedGroups.includes(group.toString());
-//   });
-
-//   if (matchedIndex !== -1) {
-//     matchedGroups.push(answers[matchedIndex].toString());
-
-//     const card = document.createElement("div");
-//     card.className = "solved-card";
-//     card.style.backgroundColor = colors[matchedIndex];
-
-//     const title = document.createElement("div");
-//     title.className = "solved-title";
-//     title.innerText = categoryLabels[matchedIndex];
-
-//     const items = document.createElement("div");
-//     items.className = "solved-items";
-
-//     answers[matchedIndex].forEach(word => {
-//       const w = document.createElement("div");
-//       w.className = "solved-word";
-//       w.innerText = word.toUpperCase();
-//       items.appendChild(w);
-//     });
-
-//     card.appendChild(title);
-//     card.appendChild(items);
-//     document.getElementById("solved").appendChild(card);
-
-//     selectedCells.forEach(cell => cell.remove());
-
-//     solvedGroups++;
-//   } else {
-//     selectedCells.forEach(cell => {
-//       cell.classList.remove("selected");
-//       cell.classList.add("shake");
-//       setTimeout(() => cell.classList.remove("shake"), 400);
-//     });
-//   }
-// }
 
 function submitGuess() {
   const selectedCells = [...document.querySelectorAll(".cell.selected")];
@@ -157,7 +107,6 @@ function submitGuess() {
   if (matchedIndex !== -1) {
     matchedGroups.push(answers[matchedIndex].toString());
 
-    // NYT-style color block result
     const block = document.createElement("div");
     block.className = "solved-block";
     block.style.backgroundColor = colors[matchedIndex];
@@ -176,18 +125,31 @@ function submitGuess() {
 
     selectedCells.forEach(cell => cell.remove());
     solvedGroups++;
+    submitBtn.disabled = true;
   } else {
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");
       cell.classList.add("shake");
       setTimeout(() => cell.classList.remove("shake"), 400);
     });
+    submitBtn.disabled = true;
   }
 }
-
-
 
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
   shuffle(allCells).forEach(cell => grid.appendChild(cell));
 }
+
+clearBtn.onclick = () => {
+  document.querySelectorAll(".cell.selected").forEach(cell => {
+    cell.classList.remove("selected");
+  });
+  submitBtn.disabled = true;
+};
+
+submitBtn.onclick = () => {
+  if (!submitBtn.disabled) {
+    submitGuess();
+  }
+};
