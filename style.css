@@ -47,7 +47,7 @@ p {
   padding: 0;
 }
 
-
+/* Cell Styles */
 .cell {
   background: #f5f5f5;
   border: 2px solid #ccc;
@@ -71,27 +71,6 @@ p {
 }
 /*
 
-/* Cell Styles */
-/*.cell {
-  background: #f5f5f5;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 90px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-weight: 600;
-  font-size: clamp(12px, 2.8vw, 14px);
-  text-transform: uppercase;
-  user-select: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  padding: 4px;
-}*/
 
 /* One-line (AMSTERDAM, MADRID, etc.) */
 .cell.one-line {
@@ -102,10 +81,13 @@ p {
 
 /* Two-line (GREAT LAKES, THE HENRY) */
 .cell.two-line {
-  white-space: normal;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
   line-height: 1.1;
   padding: 2px 6px;
 }
+
 
 /* Cell States */
 .cell:hover {
