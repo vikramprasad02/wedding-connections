@@ -200,3 +200,55 @@ button.medium-btn {
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 }
+
+#results {
+  text-align: center;
+}
+
+#results-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 24px auto;
+  max-width: 400px;
+}
+
+.result-block {
+  height: 40px;
+  width: 80px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.result-block.correct {
+  width: 80px;
+}
+
+.result-row-correct {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.result-row-incorrect {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.result-block.incorrect {
+  width: 80px;
+}
+
+#results-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+#results-controls button {
+  min-width: 100px;
+  padding: 8px 16px;
+  font-size: 14px;
+}

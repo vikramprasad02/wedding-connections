@@ -41,6 +41,7 @@ const colors = ["#f6de70", "#9cba59", "#b3c2eb", "#a776b3"];
 
 let solvedGroups = 0;
 let matchedGroups = [];
+let guessHistory = []; // Track all guess attempts
 
 const grid = document.getElementById("grid");
 const submitBtn = document.getElementById("submit-btn");
@@ -113,6 +114,15 @@ function submitGuess() {
            !matchedGroups.includes(group.toString());
   });
 
+  // Record this guess attempt in history
+  const guessAttempt = {
+    words: selectedWords,
+    isCorrect: matchedIndex !== -1,
+    categoryIndex: matchedIndex,
+    timestamp: Date.now()
+  };
+  guessHistory.push(guessAttempt);
+
   if (matchedIndex !== -1) {
     matchedGroups.push(answers[matchedIndex].toString());
 
@@ -138,8 +148,10 @@ function submitGuess() {
     
     // Check if puzzle is complete
     if (solvedGroups === 4) {
-      document.getElementById("controls").style.display = "none";
-      document.getElementById("completion-message").style.display = "block";
+      // Replace game buttons with Results button and go to results page
+      const buttonRow = document.getElementById("button-row");
+      buttonRow.innerHTML = '<button onclick="showResultsFromGame()" class="medium-btn">Results</button>';
+      showResultsPage();
     }
   } else {
     selectedCells.forEach(cell => {
@@ -168,3 +180,64 @@ submitBtn.onclick = () => {
     submitGuess();
   }
 };
+
+function showResultsPage() {
+  document.getElementById("game").style.display = "none";
+  document.getElementById("results").style.display = "block";
+  renderResults();
+}
+
+function renderResults() {
+  const resultsContainer = document.getElementById("results-history");
+  resultsContainer.innerHTML = "";
+  
+  guessHistory.forEach(guess => {
+    if (guess.isCorrect) {
+      // Four individual blocks of the same color for correct guess
+      const rowContainer = document.createElement("div");
+      rowContainer.className = "result-row-correct";
+      
+      for (let i = 0; i < 4; i++) {
+        const block = document.createElement("div");
+        block.className = "result-block correct";
+        block.style.backgroundColor = colors[guess.categoryIndex];
+        rowContainer.appendChild(block);
+      }
+      
+      resultsContainer.appendChild(rowContainer);
+    } else {
+      // Four small blocks for incorrect guess - show actual category colors
+      const rowContainer = document.createElement("div");
+      rowContainer.className = "result-row-incorrect";
+      
+      guess.words.forEach(word => {
+        const block = document.createElement("div");
+        block.className = "result-block incorrect";
+        
+        // Find which category this word belongs to
+        const categoryIndex = answers.findIndex(group => 
+          group.some(answer => answer.toUpperCase() === word)
+        );
+        
+        // Use the actual category color, or gray if word not found
+        const color = categoryIndex !== -1 ? colors[categoryIndex] : "#e0e0e0";
+        block.style.backgroundColor = color;
+        
+        rowContainer.appendChild(block);
+      });
+      
+      resultsContainer.appendChild(rowContainer);
+    }
+  });
+}
+
+function showCategories() {
+  document.getElementById("results").style.display = "none";
+  document.getElementById("game").style.display = "block";
+}
+
+function showResultsFromGame() {
+  document.getElementById("game").style.display = "none";
+  document.getElementById("results").style.display = "block";
+  renderResults();
+}
