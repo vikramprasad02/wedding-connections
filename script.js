@@ -54,24 +54,6 @@ function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
 
-// function renderGrid() {
-//   grid.innerHTML = "";
-//   shuffle(words).forEach(word => {
-//     const div = document.createElement("div");
-//     div.className = "cell";
-
-//     if (word.includes(" ")) {
-//       div.classList.add("two-line");
-//     } else {
-//       div.classList.add("one-line");
-//     }
-
-//     div.innerText = word.toUpperCase();
-//     div.onclick = () => toggleSelect(div);
-//     grid.appendChild(div);
-//   });
-// }
-
 function renderGrid() {
   grid.innerHTML = "";
   shuffle(words).forEach(word => {
@@ -88,9 +70,9 @@ function renderGrid() {
 
       // Dynamically shrink long one-word terms
       if (wordLength >= 9) {
-        div.style.fontSize = "10px";
+        div.style.fontSize = "10.5px";
       } else if (wordLength >= 7) {
-        div.style.fontSize = "13px";
+        div.style.fontSize = "14px";
       }
     }
 
