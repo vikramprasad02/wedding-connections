@@ -135,6 +135,12 @@ function submitGuess() {
     selectedCells.forEach(cell => cell.remove());
     solvedGroups++;
     submitBtn.disabled = true;
+    
+    // Check if puzzle is complete
+    if (solvedGroups === 4) {
+      document.getElementById("controls").style.display = "none";
+      document.getElementById("completion-message").style.display = "block";
+    }
   } else {
     selectedCells.forEach(cell => {
       cell.classList.remove("selected");

@@ -100,7 +100,7 @@ p {
 #solved {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 8px;
   margin: 4px auto 8px;
   max-width: 500px;
 }
