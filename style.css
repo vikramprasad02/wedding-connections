@@ -1,7 +1,7 @@
 /* Base Layout */
 body {
   font-family: 'Inter', sans-serif;
-  background: #fdf6f0;
+  background: #fefefe;
   color: #111;
   text-align: center;
   margin: 0;
@@ -46,8 +46,11 @@ p {
 }
 
 .cell {
-  background: #f5f5f5;
-  border: 2px solid #ccc;
+  /*background: #f5f5f5;*/
+  background: #ede9dd; /* parchment-like */
+  color: #111; /* rich black, consistent */
+  /*border: 2px solid #ccc;*/
+  border: none;
   border-radius: 12px;
   /*font-family: 'Inter Tight', sans-serif;*/
   font-family: 'Franklin Gothic Medium', 'Inter Tight', 'Arial Narrow', Arial, sans-serif;
@@ -61,8 +64,9 @@ p {
   user-select: none;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.1s ease;
+  /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);*/
+  box-shadow: none;
 
   /* 💡 THE IMPORTANT FIXED DIMENSIONS */
   width: 80px;
@@ -96,12 +100,19 @@ p {
 
 /* Cell States */
 .cell:hover {
-  background: #ececec;
+  background: #ede9dd;
 }
-.cell.selected {
+/*.cell.selected {
   background: #fff3c4;
   border-color: #f4bb00;
 }
+*/
+.cell.selected {
+  background: #3e3e3e;
+  color: #fdfdfb;
+  border-color: #3e3e3e;
+}
+
 .cell.correct {
   background: #d1ffd1;
   border-color: #2e7d32;
