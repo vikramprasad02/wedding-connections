@@ -44,23 +44,34 @@ p {
   border: 2px solid #ccc;
   border-radius: 10px;
   width: 100%;
-  max-width: 80px;
-  height: 60px;
-  padding: 4px;
-  text-align: center;
-  font-weight: 600;
-  font-size: clamp(12px, 3vw, 14px);
-  user-select: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  max-width: 90px;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: clamp(12px, 2.8vw, 14px);
   text-transform: uppercase;
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 4px;
+}
+
+/* One-line (AMSTERDAM, MADRID, etc.) */
+.cell.one-line {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Two-line (GREAT LAKES, THE HENRY) */
+.cell.two-line {
+  white-space: normal;
+  line-height: 1.1;
+  padding: 2px 6px;
 }
 
 /* Cell States */

@@ -59,6 +59,11 @@ function renderGrid() {
   shuffle(words).forEach(word => {
     const div = document.createElement("div");
     div.className = "cell";
+    if (word.includes(" ")) {
+      div.classList.add("two-line");
+    } else {
+      div.classList.add("one-line");
+    }
     div.innerText = word.toUpperCase();
     div.onclick = () => toggleSelect(div);
     grid.appendChild(div);
