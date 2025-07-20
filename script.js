@@ -97,6 +97,53 @@ function toggleSelect(cell) {
   }
 }
 
+// function submitGuess() {
+//   const selectedCells = [...document.querySelectorAll(".cell.selected")];
+//   const selectedWords = selectedCells.map(cell => cell.innerText.toUpperCase());
+
+//   const matchedIndex = answers.findIndex(group => {
+//     const groupUpper = group.map(word => word.toUpperCase());
+//     return groupUpper.every(word => selectedWords.includes(word)) &&
+//            !matchedGroups.includes(group.toString());
+//   });
+
+//   if (matchedIndex !== -1) {
+//     matchedGroups.push(answers[matchedIndex].toString());
+
+//     const card = document.createElement("div");
+//     card.className = "solved-card";
+//     card.style.backgroundColor = colors[matchedIndex];
+
+//     const title = document.createElement("div");
+//     title.className = "solved-title";
+//     title.innerText = categoryLabels[matchedIndex];
+
+//     const items = document.createElement("div");
+//     items.className = "solved-items";
+
+//     answers[matchedIndex].forEach(word => {
+//       const w = document.createElement("div");
+//       w.className = "solved-word";
+//       w.innerText = word.toUpperCase();
+//       items.appendChild(w);
+//     });
+
+//     card.appendChild(title);
+//     card.appendChild(items);
+//     document.getElementById("solved").appendChild(card);
+
+//     selectedCells.forEach(cell => cell.remove());
+
+//     solvedGroups++;
+//   } else {
+//     selectedCells.forEach(cell => {
+//       cell.classList.remove("selected");
+//       cell.classList.add("shake");
+//       setTimeout(() => cell.classList.remove("shake"), 400);
+//     });
+//   }
+// }
+
 function submitGuess() {
   const selectedCells = [...document.querySelectorAll(".cell.selected")];
   const selectedWords = selectedCells.map(cell => cell.innerText.toUpperCase());
@@ -110,30 +157,24 @@ function submitGuess() {
   if (matchedIndex !== -1) {
     matchedGroups.push(answers[matchedIndex].toString());
 
-    const card = document.createElement("div");
-    card.className = "solved-card";
-    card.style.backgroundColor = colors[matchedIndex];
+    // NYT-style color block result
+    const block = document.createElement("div");
+    block.className = "solved-block";
+    block.style.backgroundColor = colors[matchedIndex];
 
-    const title = document.createElement("div");
-    title.className = "solved-title";
-    title.innerText = categoryLabels[matchedIndex];
+    const category = document.createElement("div");
+    category.className = "solved-block-category";
+    category.innerText = categoryLabels[matchedIndex];
+    block.appendChild(category);
 
-    const items = document.createElement("div");
-    items.className = "solved-items";
+    const wordLine = document.createElement("div");
+    wordLine.className = "solved-block-words";
+    wordLine.innerText = answers[matchedIndex].map(w => w.toUpperCase()).join(", ");
+    block.appendChild(wordLine);
 
-    answers[matchedIndex].forEach(word => {
-      const w = document.createElement("div");
-      w.className = "solved-word";
-      w.innerText = word.toUpperCase();
-      items.appendChild(w);
-    });
-
-    card.appendChild(title);
-    card.appendChild(items);
-    document.getElementById("solved").appendChild(card);
+    document.getElementById("solved").appendChild(block);
 
     selectedCells.forEach(cell => cell.remove());
-
     solvedGroups++;
   } else {
     selectedCells.forEach(cell => {
@@ -143,6 +184,8 @@ function submitGuess() {
     });
   }
 }
+
+
 
 function reshuffleGrid() {
   const allCells = [...document.querySelectorAll(".cell:not(.correct)")];
