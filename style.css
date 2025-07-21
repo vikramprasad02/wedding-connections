@@ -9,16 +9,28 @@ body {
   padding: 0;
 }
 
-h1 {
+h1, .landing-heading {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: 28px;
-  margin: 20px 0 10px;
+  font-weight: 700;
 }
 
-p {
-  margin: 10px 0 20px;
-  font-size: 16px;
+p, em, .landing-body-text, #game p, #results p {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+}
+
+#game h1, #results h1 {
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+#game p, #results p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  text-align: left;
+  margin-bottom: 24px;
+  max-width: 600px;
 }
 
 #container {
@@ -191,6 +203,16 @@ button.medium-btn {
 #landing button {
   display: block;
   margin: 32px auto 0 auto;
+}
+
+#landing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#landing button {
+  margin-top: 12px;
 }
 
 @keyframes shake {
