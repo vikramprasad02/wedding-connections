@@ -208,7 +208,7 @@ button.medium-btn {
 #landing {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 #landing button {
@@ -273,4 +273,19 @@ button.medium-btn {
   min-width: 100px;
   padding: 8px 16px;
   font-size: 14px;
+}
+
+.landing-heading {
+  text-align: center;
+}
+
+.landing-body-text {
+  text-align: left;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 36px;
+}
+
+#game h1, #results h1, #game p, #results p {
+  text-align: center;
 }
