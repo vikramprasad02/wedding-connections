@@ -5,24 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wedding Connections</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="container">
     <!-- Landing Page -->
     <div id="landing">
-      <h1>Welcome to Wedding Connections 💍</h1>
-      <p>
-        We're so excited you're here! To kick off the celebration, we created a game inspired by our lives together.<br/>
+      <h1 class="landing-heading">Welcome to S+V Connections 💍</h1>
+      <div id="landing-text" class="landing-body-text">
+        We’re so excited you’re here! To kick off the celebration, we created a “NYT Connections”-style game inspired by our lives together.<br><br>
+        Playing Connections became part of our daily ritual while we were nomad-ing last year, and we wanted to share that joy with you this weekend.<br><br>
         Tap below to begin — and have fun playing!
-      </p>
+      </div>
       <button onclick="startGame()">Start Game</button>
     </div>
 
     <!-- Game Page -->
     <div id="game" style="display: none;">
-      <h1>Wedding Connections 💕</h1>
-      <p><em>Select 4 related words to form a group.</em></p>
+      <h1>S+V Connections 💕</h1>
+      <p><em>Find groups of four related items.</em></p>
 
       <div id="solved"></div>
       <div id="grid"></div>
@@ -40,8 +41,8 @@
 
     <!-- Results Page -->
     <div id="results" style="display: none;">
-      <h1>You solved it! 🎉</h1>
-      <p>Here's your guessing history:</p>
+      <h1>You solved it! ✨</h1>
+      <p>Take a screenshot and send us your results, we’d love to see it!</p>
       
       <div id="results-history"></div>
       
